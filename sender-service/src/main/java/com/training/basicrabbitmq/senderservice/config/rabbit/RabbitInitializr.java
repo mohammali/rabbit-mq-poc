@@ -6,7 +6,6 @@ import com.rabbitmq.client.ConnectionFactory;
 import com.training.basicrabbitmq.senderservice.config.rabbit.properties.RabbitConfigProp;
 import com.training.basicrabbitmq.senderservice.config.rabbit.properties.RabbitExchangeBindingConfigProp;
 import com.training.basicrabbitmq.senderservice.config.rabbit.properties.RabbitExchangeConfigProp;
-import com.training.basicrabbitmq.senderservice.config.rabbit.properties.RabbitQueueConfigProp;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
@@ -26,14 +25,7 @@ public class RabbitInitializr implements CommandLineRunner {
     public void run(String... args) throws Exception {
         try (Connection connection = connectionFactory.newConnection()) {
             Channel channel = connection.createChannel();
-            initQueues(channel, rabbitConfig.queue());
             initExchanges(channel, rabbitConfig.exchange());
-        }
-    }
-
-    private void initQueues(Channel channel, List<RabbitQueueConfigProp> list) throws IOException {
-        for (RabbitQueueConfigProp config : list) {
-            channel.queueDeclare(config.name(), true, false, true, null);
         }
     }
 
@@ -41,6 +33,7 @@ public class RabbitInitializr implements CommandLineRunner {
         for (RabbitExchangeConfigProp config : list) {
             channel.exchangeDeclare(config.name(), config.type(), true);
             for (RabbitExchangeBindingConfigProp bindingConfig : config.binding()) {
+                channel.queueDeclare(bindingConfig.queueName(), true, false, false, null);
                 channel.queueBind(
                     bindingConfig.queueName(),
                     config.name(),

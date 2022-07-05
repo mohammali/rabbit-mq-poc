@@ -3,55 +3,43 @@ server:
 
 rabbit:
   host: "localhost"
-  queue:
-    - name: "direct-test-1"
-    - name: "direct-test-2"
-    - name: "topic-test-1"
-    - name: "topic-test-2"
-    - name: "topic-test-3"
-    - name: "fanout-test-1"
-    - name: "fanout-test-2"
-    - name: "fanout-test-3"
-    - name: "header-test-1"
-    - name: "header-test-2"
-    - name: "header-test-3"
   exchange:
-    - name: "direct-test"
+    - name: "poc-direct"
       type: DIRECT
       binding:
-        - queueName: "direct-test-1"
+        - queueName: "poc-direct-1"
           routingKey: "route1"
-        - queueName: "direct-test-2"
+        - queueName: "poc-direct-2"
           routingKey: "route2"
-    - name: "topic-test"
+    - name: "poc-topic"
       type: TOPIC
       binding:
-        - queueName: "topic-test-1"
+        - queueName: "poc-topic-1"
           routingKey: "users.#"
-        - queueName: "topic-test-2"
+        - queueName: "poc-topic-2"
           routingKey: "users.*"
-        - queueName: "topic-test-3"
+        - queueName: "poc-topic-3"
           routingKey: "users.update"
-    - name: "fanout-test"
+    - name: "poc-fanout"
       type: FANOUT
       binding:
-        - queueName: "fanout-test-1"
-        - queueName: "fanout-test-2"
-        - queueName: "fanout-test-3"
-    - name: "header-test"
+        - queueName: "poc-fanout-1"
+        - queueName: "poc-fanout-2"
+        - queueName: "poc-fanout-3"
+    - name: "poc-header"
       type: HEADERS
       binding:
-        - queueName: "header-test-1"
+        - queueName: "poc-header-1"
           headers:
             header11: value11
             header12: value12
             header13: value13
-        - queueName: "header-test-2"
+        - queueName: "poc-header-2"
           headers:
             header21: value21
             header22: value22
             header23: value23
-        - queueName: "header-test-3"
+        - queueName: "poc-header-3"
           headers:
             header31: value31
             header32: value32

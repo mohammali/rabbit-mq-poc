@@ -1,10 +1,8 @@
 package com.training.basicrabbitmq.senderservice.rabbit;
 
+import com.training.basicrabbitmq.senderservice.config.rabbit.properties.RabbitConfigProp;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("rabbit")
@@ -13,24 +11,9 @@ public class RabbitController {
 
     private final RabbitManager manager;
 
-    @GetMapping("queue")
-    public List<String> getQueues() {
-        return manager.getQueue();
-    }
-
-    @GetMapping("exchange")
-    public List<String> getExchanges() {
-        return manager.getExchange();
-    }
-
-    @GetMapping("routes")
-    public List<String> getRoutes() {
-        return manager.getRoutesKeys();
-    }
-
-    @GetMapping("headers")
-    public List<String> getHeaders() {
-        return manager.getHeaders();
+    @GetMapping
+    public RabbitConfigProp getQueues() {
+        return manager.getConfigProp();
     }
 
     @PostMapping
