@@ -1,0 +1,17 @@
+server:
+  port: 8081
+
+rabbit:
+  host: "localhost"
+  queue:
+    - name: "direct-test-1"
+    - name: "direct-test-2"
+    - name: "topic-test-1"
+    - name: "topic-test-2"
+    - name: "topic-test-3"
+    - name: "fanout-test-1"
+    - name: "fanout-test-2"
+    - name: "fanout-test-3"
+    - name: "header-test-1"
+    - name: "header-test-2"
+    - name: "header-test-3"
